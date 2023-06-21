@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+ <record id="view_hospital_patient_form" model="ir.ui.view">
+        <field name="name">res.hospital.form</field>
+        <field name="model">res.hospital</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+
+                    <group>
+
+                        <field name="name"/>
+                        <field name="contact"/>
+                        <field name="dob"/>
+
+                        <field name="gender"/>
+
+                
+                    </group>
+                </sheet>
+                
+            </form>
+        </field>
+    </record>
+
+    <record id="view_hospital_patient_tree" model="ir.ui.view">
+        <field name="name">res.hospital.tree</field>
+        <field name="model">res.hospital</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree>
+          
+                        <field name="name"/>
+                        <field name="contact"/>
+                        <field name="dob"/>
+
+                        <field name="gender"/>
+
+            </tree>
+        </field>
+    </record>
+
+
+
+
+
+<record id="action_hospital_patient" model="ir.actions.act_window">
+        <field name="name">Patients</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.hospital</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context"></field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first patient!
+            </p>
+        </field>
+    </record>
+
+    <record id="view_hospital_patient_search" model="ir.ui.view">
+        <field name="name">res.hospital.search</field>
+        <field name="model">res.hospital</field>
+        <field name="type">search</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" string="Patient Name" filter_domain="[ ('name', 'ilike', self)]"/>
+
+                <filter name='filter_male' string='Male' domain="[('gender','=','male')]" />
+                <filter name='filter_female' string='Female' domain="[('gender','=','female')]" />
+      
+
+                 <searchpanel> <!--used to show the catogeries in odoo-->
+                <field name='gender' enable_counters="1" select='multi'/>
+                </searchpanel>
+            </search>
+        </field>
+    </record>
+
+    <menuitem id="menu_patient" 
+    name="Patient Data" 
+    action="action_hospital_patient" 
+    parent="menu_patient_root" 
+    sequence="0"/>
+
+</odoo>
